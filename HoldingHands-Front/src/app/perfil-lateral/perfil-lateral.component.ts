@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../service/usuario.service';
-import { User } from '../model/User'
-import { AuthService } from '../service/auth.service';
+import { User } from '../model/User';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-perfil-lateral',
@@ -12,22 +11,13 @@ export class PerfilLateralComponent implements OnInit {
 
   nome: string
   user: User = new User()
+  nomeUser = environment.nomeUser
+  fotoUser = environment.fotoUser
 
-  constructor(
-    private usuarioService: UsuarioService) { }
+  constructor() { }    
 
   ngOnInit() {
 
-    this.findByNomeUser()
-
-  }
-
-  findByNomeUser() {
-    let nomeUser = localStorage.getItem("nome")
-    this.usuarioService.getByNomeUser(nomeUser).subscribe((resp: User) => {
-      this.user = resp
-      this.nome = this.user.nome
-    })
   }
 
 }
